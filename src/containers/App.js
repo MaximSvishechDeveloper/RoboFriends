@@ -1,22 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect } from "react";
 import CardList from "../components/CardList";
 import SearchBox from "../components/SearchBox";
+import { useDispatch, useSelector } from "react-redux";
+import {fetchAsync} from "../state/robots/robotsSlice"
 import Scroll from "../components/Scroll";
 import "./App.css";
 
 function App() {
-  const [searchField, setSearchField] = useState("");
-  const [robots, setRobots] = useState([]);
+  const dispatch = useDispatch();
+  const searchField = useSelector((state) => state.search.value);
+  const robots = useSelector((state) => state.robots.robots )
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/users')
-    .then(response=> response.json())
-    .then(users => {setRobots(users)});
-  },[])
-
-  const onSearchChange = (event) => {
-    setSearchField(event.target.value);
-  };
+    dispatch(fetchAsync());
+  },[dispatch])
 
   const filteredRobots = robots.filter((robot) => {
     return robot.name
@@ -30,7 +27,7 @@ function App() {
     return (
       <div className="tc">
         <h1 className="f1">RoboFriends</h1>
-        <SearchBox searchChange={onSearchChange} />
+        <SearchBox/>
         <Scroll>
             <CardList robots={filteredRobots} />
         </Scroll>
