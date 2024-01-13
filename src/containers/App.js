@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {fetchAsync} from "../state/robots/robotsSlice"
 import Scroll from "../components/Scroll";
 import "./App.css";
+import Header from "../components/Header";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ function App() {
   } else {
     return (
       <div className="tc">
-        <h1 className="f1">RoboFriends</h1>
+        <Header/>
         <SearchBox/>
         <Scroll>
             <CardList robots={filteredRobots} />
