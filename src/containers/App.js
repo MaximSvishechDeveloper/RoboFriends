@@ -1,4 +1,4 @@
-import React, {useEffect } from "react";
+import React, {useEffect,useMemo } from "react";
 import CardList from "../components/CardList";
 import SearchBox from "../components/SearchBox";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,11 +16,13 @@ function App() {
     dispatch(fetchAsync());
   },[dispatch])
 
-  const filteredRobots = robots.filter((robot) => {
-    return robot.name
-      .toLocaleLowerCase()
-      .includes(searchField.toLocaleLowerCase());
-  });
+  const filteredRobots = useMemo(() => {
+    return robots.filter((robot) => {
+      return robot.name
+        .toLocaleLowerCase()
+        .includes(searchField.toLocaleLowerCase());
+    });
+  }, [robots, searchField]);
 
   if (robots.length === 0) {
     return <h1>Loading</h1>;

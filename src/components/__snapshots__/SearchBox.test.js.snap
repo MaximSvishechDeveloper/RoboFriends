@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchBox Component matches the snapshot 1`] = `
+<Provider
+  store={
+    Object {
+      "@@observable": [Function],
+      "dispatch": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <SearchBox>
+    <div
+      className="pa2"
+    >
+      <input
+        className="pa3 ba b--green bg-lightest-blue"
+        onChange={[Function]}
+        placeholder="search robots"
+        type="search"
+        value=""
+      />
+    </div>
+  </SearchBox>
+</Provider>
+`;
