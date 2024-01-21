@@ -4,15 +4,15 @@ import "./index.css";
 import App from "./containers/App.js";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
-import { store } from "./store.js";
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import { store } from "./store.ts";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import "tachyons";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <App />
-    </Provider>
+  </Provider>
 );
 
 // If you want your app to work offline and load faster, you can change
