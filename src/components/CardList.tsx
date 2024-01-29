@@ -1,7 +1,17 @@
-import React from "react";
+import React, { ReactElement } from "react";
 import Card from "./Card";
 
-const CardList = ({robots}) => {
+export interface Robot {
+  id: string;
+  name: string;
+  email: string;
+}
+
+interface CardListProps {
+  robots: Robot[];
+}
+
+const CardList: React.FC<CardListProps> = ({ robots }) => {
   return (
     <>
       {robots.map((user, i) => {

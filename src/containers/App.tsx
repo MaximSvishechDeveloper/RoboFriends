@@ -1,21 +1,29 @@
-import React, {useEffect,useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import CardList from "../components/CardList";
 import SearchBox from "../components/SearchBox";
 import { useDispatch, useSelector } from "react-redux";
-import {fetchAsync} from "../state/robots/robotsSlice"
+import { fetchAsync } from "../state/robots/robotsSlice";
 import Scroll from "../components/Scroll";
 import "./App.css";
 import Header from "../components/Header";
+import { AppDispatch, RootState } from "../store";
 
 function App() {
-  const dispatch = useDispatch();
-  const searchField = useSelector((state) => state.search.value);
-  const robots = useSelector((state) => state.robots.robots )
+  const dispatch = useDispatch<AppDispatch>();
+  const searchField = useSelector((state: RootState) => state.search.value);
+  const robots = useSelector((state: RootState) => state.robots.robots);
 
   useEffect(() => {
-    dispatch(fetchAsync());
-  },[dispatch])
+    const fetchData = async () => {
+      try {
+        dispatch(fetchAsync());
+      } catch (error) {
+        console.error("Error dispatching fetchAsync:", error);
+      }
+    };
 
+    fetchData();
+  }, [dispatch]);
   const filteredRobots = useMemo(() => {
     return robots.filter((robot) => {
       return robot.name
@@ -29,10 +37,10 @@ function App() {
   } else {
     return (
       <div className="tc">
-        <Header/>
-        <SearchBox/>
+        <Header />
+        <SearchBox />
         <Scroll>
-            <CardList robots={filteredRobots} />
+          <CardList robots={filteredRobots} />
         </Scroll>
       </div>
     );
